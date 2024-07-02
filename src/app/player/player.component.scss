@@ -1,0 +1,14 @@
+@import 'src/styles/variables';
+
+.player-card {
+  margin: 8px;
+  text-align: center;
+  padding: 15px;
+
+  .card {
+    margin-top: 16px;
+    font-size: 24px;
+    font-weight: bold;
+    color: mat-color($primary);
+  }
+}

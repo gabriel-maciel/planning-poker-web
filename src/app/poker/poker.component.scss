@@ -1,0 +1,23 @@
+.poker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.players {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  button {
+    margin: 8px;
+    padding: 10px 20px;
+  }
+}

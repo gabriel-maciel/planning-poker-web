@@ -1,0 +1,18 @@
+<div class="poker">
+  <div class="players">
+    <app-player
+      *ngFor="let player of players; let i = index"
+      [playerName]="player.name"
+      [selectedCard]="player.selectedCard"
+    ></app-player>
+  </div>
+  <div class="cards">
+    <button
+      mat-raised-button
+      *ngFor="let card of cards"
+      (click)="selectCard(0, card)"
+    >
+      {{ card }}
+    </button>
+  </div>
+</div>
