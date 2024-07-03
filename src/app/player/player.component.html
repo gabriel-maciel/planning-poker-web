@@ -1,6 +1,12 @@
 <mat-card class="player-card" [ngClass]="{ 'active-player': isActive }">
   <mat-card-title>{{ playerName }}</mat-card-title>
   <mat-card-content>
-    <div *ngIf="selectedCard" class="card">{{ selectedCard }}</div>
+    <div
+      *ngIf="selectedCard"
+      class="card"
+      [ngClass]="{ 'current-player-card': isCurrentPlayer }"
+    >
+      {{ selectedCard }}
+    </div>
   </mat-card-content>
 </mat-card>

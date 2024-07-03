@@ -9,4 +9,5 @@ export class PlayerComponent {
   @Input() playerName: string = '';
   @Input() selectedCard: string = '';
   @Input() isActive: boolean = false;
+  @Input() isCurrentPlayer: boolean = false;
 }

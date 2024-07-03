@@ -1,6 +1,6 @@
 <div class="poker">
   <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
-  <div *ngIf="!readyToPlay" class="player-name-input">
+  <div class="player-name-input" *ngIf="!readyToPlay">
     <mat-form-field>
       <mat-label>Enter your name</mat-label>
       <input
@@ -17,8 +17,13 @@
     <app-player
       *ngFor="let player of players | keyvalue"
       [playerName]="player.value"
-      [selectedCard]="selectedCards.get(player.value) || ''"
+      [selectedCard]="
+        cardSelections.get(player.value) ||
+        selectedCards.get(player.value) ||
+        ''
+      "
       [isActive]="isActivePlayer(player.value)"
+      [isCurrentPlayer]="isCurrentPlayer(player.value)"
     ></app-player>
   </div>
   <div class="cards" *ngIf="readyToPlay">
@@ -26,8 +31,25 @@
       mat-raised-button
       *ngFor="let card of cards"
       (click)="selectCard(card)"
+      [ngClass]="{ 'selected-card': isCardSelected(card) }"
     >
       {{ card }}
+    </button>
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="revealCards()"
+      [disabled]="gameState.revealed"
+    >
+      Reveal Cards
+    </button>
+    <button
+      mat-raised-button
+      color="warn"
+      (click)="resetGame()"
+      *ngIf="gameState.revealed"
+    >
+      Reset Game
     </button>
   </div>
 </div>
