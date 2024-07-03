@@ -1,12 +1,27 @@
 <div class="poker">
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  <div *ngIf="!readyToPlay" class="player-name-input">
+    <mat-form-field>
+      <mat-label>Enter your name</mat-label>
+      <input
+        matInput
+        [(ngModel)]="playerName"
+        (keydown.enter)="setPlayerName()"
+      />
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="setPlayerName()">
+      Join
+    </button>
+  </div>
   <div class="players">
     <app-player
       *ngFor="let player of players | keyvalue"
       [playerName]="player.value"
-      [selectedCard]="selectedCards.get(player.value) || '-'"
+      [selectedCard]="selectedCards.get(player.value) || ''"
+      [isActive]="isActivePlayer(player.value)"
     ></app-player>
   </div>
-  <div class="cards">
+  <div class="cards" *ngIf="readyToPlay">
     <button
       mat-raised-button
       *ngFor="let card of cards"

@@ -7,15 +7,9 @@ import { Socket } from 'ngx-socket-io';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  playerName: any;
+  constructor(private socket: Socket) {}
 
-  constructor(private socket: Socket) {
-    this.playerName = prompt('Enter your name');
-  }
-
-  ngOnInit() {
-    this.socket.emit('newPlayer', this.playerName);
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
     this.socket.disconnect();
