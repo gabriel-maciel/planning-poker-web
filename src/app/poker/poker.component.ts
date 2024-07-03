@@ -17,7 +17,12 @@ export class PokerComponent implements OnInit {
     this.socket.on('updatePlayers', (players: { [key: string]: string }) => {
       this.players = new Map(Object.entries(players));
     });
-
+    this.socket.on(
+      'updateSelectedCards',
+      (selectedCards: { [key: string]: string }) => {
+        this.selectedCards = new Map(Object.entries(selectedCards));
+      },
+    );
     this.socket.on('cardSelected', (data: any) => {
       this.selectedCards.set(data.playerName, data.selectedCard);
     });
