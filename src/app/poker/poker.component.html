@@ -13,43 +13,48 @@
       Join Room
     </button>
   </div>
-  <div class="players">
-    <app-player
-      *ngFor="let player of mapToArray(players$ | async)"
-      [playerName]="player.value"
-      [selectedCard]="
-        (cardSelections$ | async)?.get(player.value) ||
-        (selectedCards$ | async)?.get(player.value) ||
-        ''
-      "
-      [isActive]="isActivePlayer(player.value)"
-      [isCurrentPlayer]="isActivePlayer(player.value)"
-    ></app-player>
-  </div>
-  <div class="cards" *ngIf="readyToPlay">
-    <button
-      mat-raised-button
-      *ngFor="let card of cards"
-      (click)="selectCard(card)"
-      [ngClass]="{ 'selected-card': isCardSelected(card) }"
-    >
-      {{ card }}
-    </button>
-    <button
-      mat-raised-button
-      color="accent"
-      (click)="revealCards()"
-      [disabled]="(gameState$ | async)?.revealed"
-    >
-      Reveal Cards
-    </button>
-    <button
-      mat-raised-button
-      color="warn"
-      (click)="resetGame()"
-      *ngIf="(gameState$ | async)?.revealed"
-    >
-      Reset Game
-    </button>
+  <div *ngIf="readyToPlay">
+    <div class="current-room">
+      Current Room: <span class="room-name">{{ room }}</span>
+    </div>
+    <div class="players">
+      <app-player
+        *ngFor="let player of mapToArray(players$ | async)"
+        [playerName]="player.value"
+        [selectedCard]="
+          (cardSelections$ | async)?.get(player.value) ||
+          (selectedCards$ | async)?.get(player.value) ||
+          ''
+        "
+        [isActive]="isActivePlayer(player.value)"
+        [isCurrentPlayer]="isActivePlayer(player.value)"
+      ></app-player>
+    </div>
+    <div class="cards">
+      <button
+        mat-raised-button
+        *ngFor="let card of cards"
+        (click)="selectCard(card)"
+        [ngClass]="{ 'selected-card': isCardSelected(card) }"
+      >
+        {{ card }}
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="revealCards()"
+        [disabled]="(gameState$ | async)?.revealed"
+      >
+        Reveal Cards
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="resetGame()"
+        *ngIf="(gameState$ | async)?.revealed"
+      >
+        Reset Game
+      </button>
+    </div>
   </div>
 </div>

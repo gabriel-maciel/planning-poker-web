@@ -2,27 +2,56 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+  margin: 20px;
 
-.players {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
-.cards {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-
-  button {
-    margin: 8px;
-    padding: 10px 20px;
+  .error {
+    color: red;
+    font-weight: bold;
   }
-}
 
-.selected-card {
-  border: 2px solid #28a745;
-  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.5);
+  .room-name-input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .current-room {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .room-name {
+      color: #007bff;
+      font-weight: bold;
+    }
+  }
+
+  .players {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    button {
+      margin: 5px;
+    }
+
+    .selected-card {
+      border: 2px solid #28a745;
+      box-shadow: 0 2px 8px rgba(40, 167, 69, 0.5);
+    }
+  }
 }
