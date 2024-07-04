@@ -58,6 +58,12 @@ class RoomService {
           this.io,
           room,
         );
+
+        if (Object.keys(this.rooms[room].players).length === 0) {
+          delete this.rooms[room];
+          console.log(`Room ${room} deleted as it has no remaining players`);
+        }
+
         break;
       }
     }
@@ -106,6 +112,10 @@ class RoomService {
       this.io,
       room,
     );
+  }
+
+  getAllRoomsInfo() {
+    return this.rooms;
   }
 }
 

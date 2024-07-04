@@ -13,6 +13,10 @@ const io = socketIo(server, {
 
 const roomService = new RoomService(io);
 
+app.get('/info', (req, res) => {
+  res.json(roomService.getAllRoomsInfo());
+});
+
 io.on('connection', (socket) => {
   socket.on('joinRoom', (room, playerName, callback) =>
     roomService.joinRoom(socket, room, playerName, callback),
