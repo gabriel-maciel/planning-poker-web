@@ -1,27 +1,28 @@
-# PlanningPokerWeb
+# Planning Poker Web Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/617bb82f-6c78-4ae2-8d55-dc06c51f0a06/deploy-status)](https://app.netlify.com/sites/thepoker/deploys)
 
-## Development server
+Kickstart your planning sessions with ease and at no cost. Simply create a room and initiate your collaborative estimation process.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+Real-time collaborative estimation based on WebSocket for instant updates  \
+\
+![image](https://github.com/gabriel-maciel/planning-poker-web/assets/30875244/7cfb82ff-5598-44d9-b6dc-fdf7300d6ce2)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+Easy room creation to start a planning session very quick \
+\
+![image](https://github.com/gabriel-maciel/planning-poker-web/assets/30875244/d35d33e4-60b9-4383-b1e1-6f21d3dabfef)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Support
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+If you find this project useful, consider supporting me on Buy Me a Coffee:
 
-## Running end-to-end tests
+[![Buy Me a Coffee](https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png)](https://www.buymeacoffee.com/gabrielmaciel)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+## License
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
