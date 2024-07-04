@@ -11,8 +11,9 @@ import { PlayerComponent } from './player/player.component';
 import { PokerComponent } from './poker/poker.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { KeyValuePipe } from './keyvalue.pipe';
+import { environment } from '../environments/environment.local';
 
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+const config: SocketIoConfig = { url: environment.apiUrl, options: {} };
 
 @NgModule({
   declarations: [AppComponent, PlayerComponent, PokerComponent, KeyValuePipe],

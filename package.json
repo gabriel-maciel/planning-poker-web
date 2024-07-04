@@ -1,13 +1,14 @@
 {
   "name": "planning-poker-web",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "postbuild": "node replace-env.js"
   },
   "private": true,
   "dependencies": {
