@@ -16,6 +16,7 @@ export class PokerComponent implements OnInit, OnDestroy {
   selectedCards: Map<string, string> = new Map(); // Map for player names and selected cards
   cardSelections: Map<string, string> = new Map(); // Map for player names and selected card symbols ('-' or actual card)
   playerName: string | null = null;
+  room: string | null = null;
   errorMessage: string | null = null;
   readyToPlay: boolean = false;
   gameState: GameState = {
@@ -51,10 +52,11 @@ export class PokerComponent implements OnInit, OnDestroy {
     this.socket.disconnect();
   }
 
-  setPlayerName() {
-    if (this.playerName) {
+  joinRoom() {
+    if (this.room && this.playerName) {
       this.socket.emit(
-        'newPlayer',
+        'joinRoom',
+        this.room,
         this.playerName,
         (response: { success: boolean; message?: string }) => {
           if (!response.success) {
@@ -69,10 +71,15 @@ export class PokerComponent implements OnInit, OnDestroy {
   }
 
   selectCard(card: string) {
-    if (!this.readyToPlay || this.gameState.revealed || !this.playerName) {
+    if (
+      !this.readyToPlay ||
+      this.gameState.revealed ||
+      !this.playerName ||
+      !this.room
+    ) {
       return;
     }
-    this.socket.emit('cardSelected', {
+    this.socket.emit('cardSelected', this.room, {
       playerName: this.playerName,
       selectedCard: card,
     });
@@ -81,7 +88,9 @@ export class PokerComponent implements OnInit, OnDestroy {
   }
 
   revealCards() {
-    this.socket.emit('revealCards');
+    if (this.room) {
+      this.socket.emit('revealCards', this.room);
+    }
   }
 
   isActivePlayer(playerName: string): boolean {
@@ -92,9 +101,11 @@ export class PokerComponent implements OnInit, OnDestroy {
   }
 
   resetGame() {
-    this.socket.emit('resetGame');
-    this.cardSelections.clear();
-    this.currentPlayerCard = null;
+    if (this.room) {
+      this.socket.emit('resetGame', this.room);
+      this.cardSelections.clear();
+      this.currentPlayerCard = null;
+    }
   }
 
   isCurrentPlayer(playerName: string): boolean {
