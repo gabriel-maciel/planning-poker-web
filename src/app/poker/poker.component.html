@@ -1,55 +1,60 @@
 <div class="poker">
   <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
-  <div class="player-name-input" *ngIf="!readyToPlay">
+  <div class="room-name-input" *ngIf="!readyToPlay">
+    <mat-form-field>
+      <mat-label>Enter room name</mat-label>
+      <input matInput [(ngModel)]="room" (keydown.enter)="joinRoom()" />
+    </mat-form-field>
     <mat-form-field>
       <mat-label>Enter your name</mat-label>
-      <input
-        matInput
-        [(ngModel)]="playerName"
-        (keydown.enter)="setPlayerName()"
-      />
+      <input matInput [(ngModel)]="playerName" (keydown.enter)="joinRoom()" />
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="setPlayerName()">
-      Join
+    <button mat-raised-button color="primary" (click)="joinRoom()">
+      Join Room
     </button>
   </div>
-  <div class="players">
-    <app-player
-      *ngFor="let player of players | keyvalue"
-      [playerName]="player.value"
-      [selectedCard]="
-        cardSelections.get(player.value) ||
-        selectedCards.get(player.value) ||
-        ''
-      "
-      [isActive]="isActivePlayer(player.value)"
-      [isCurrentPlayer]="isCurrentPlayer(player.value)"
-    ></app-player>
-  </div>
-  <div class="cards" *ngIf="readyToPlay">
-    <button
-      mat-raised-button
-      *ngFor="let card of cards"
-      (click)="selectCard(card)"
-      [ngClass]="{ 'selected-card': isCardSelected(card) }"
-    >
-      {{ card }}
-    </button>
-    <button
-      mat-raised-button
-      color="accent"
-      (click)="revealCards()"
-      [disabled]="gameState.revealed"
-    >
-      Reveal Cards
-    </button>
-    <button
-      mat-raised-button
-      color="warn"
-      (click)="resetGame()"
-      *ngIf="gameState.revealed"
-    >
-      Reset Game
-    </button>
+  <div *ngIf="readyToPlay">
+    <div class="current-room">
+      Current Room: <span class="room-name">{{ room }}</span>
+    </div>
+    <div class="players">
+      <app-player
+        *ngFor="let player of mapToArray(players$ | async)"
+        [playerName]="player.value"
+        [selectedCard]="
+          (cardSelections$ | async)?.get(player.value) ||
+          (selectedCards$ | async)?.get(player.value) ||
+          ''
+        "
+        [isActive]="isActivePlayer(player.value)"
+        [isCurrentPlayer]="isActivePlayer(player.value)"
+      ></app-player>
+    </div>
+    <div class="cards">
+      <button
+        mat-raised-button
+        *ngFor="let card of cards"
+        (click)="selectCard(card)"
+        [ngClass]="{ 'selected-card': isCardSelected(card) }"
+      >
+        {{ card }}
+      </button>
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="revealCards()"
+        [disabled]="(gameState$ | async)?.revealed"
+      >
+        Reveal Cards
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="resetGame()"
+        *ngIf="(gameState$ | async)?.revealed"
+      >
+        Reset Game
+      </button>
+    </div>
   </div>
 </div>
